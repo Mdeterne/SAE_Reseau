@@ -5,7 +5,9 @@ ip link set dev eth1 up
 ip add add 172.16.207.249/30 dev eth2
 ip link set dev eth2 up
 
-ip route add default via VM
 ip route add 172.16.207.224/28 via 172.16.207.242
 ip route add 172.16.204.0/23 via 172.16.207.246
 ip route add 172.16.200.0/22 via 172.16.207.250
+
+iptables -t nat -A POSTROUTING -o eth3 -j MASQUERADE
+echo "nameserver 8.8.8.8" >> /etc/resolv.conf
